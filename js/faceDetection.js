@@ -23,7 +23,7 @@ export async function initFaceLandmarker() {
     try {
       // Dynamic import from CDN
       const vision = await import(
-        'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/vision_bundle.mjs'
+        'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/vision_bundle.mjs'
       );
 
       FaceLandmarker = vision.FaceLandmarker;
@@ -31,7 +31,7 @@ export async function initFaceLandmarker() {
 
       // Load WASM fileset
       const filesetResolver = await FilesetResolver.forVisionTasks(
-        'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm'
+        'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm'
       );
 
       // Create Face Landmarker instance
@@ -60,14 +60,14 @@ export async function initFaceLandmarker() {
         console.warn('GPU delegate failed, falling back to CPU...');
         try {
           const vision = await import(
-            'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/vision_bundle.mjs'
+            'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/vision_bundle.mjs'
           );
 
           FaceLandmarker = vision.FaceLandmarker;
           FilesetResolver = vision.FilesetResolver;
 
           const filesetResolver = await FilesetResolver.forVisionTasks(
-            'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm'
+            'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm'
           );
 
           faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
