@@ -375,7 +375,10 @@ async function shareResult() {
 function loadImage(url) {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.crossOrigin = 'anonymous';
+    // Only set crossOrigin if we're loading from an external http/https URL
+    if (url.startsWith('http') && !url.startsWith('blob:')) {
+      img.crossOrigin = 'anonymous';
+    }
     img.onload = () => resolve(img);
     img.onerror = () => reject(new Error('Failed to load image'));
     img.src = url;

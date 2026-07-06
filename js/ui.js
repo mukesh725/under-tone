@@ -3,11 +3,14 @@
  * DOM manipulation, screen transitions, animated components.
  */
 
+let currentScreenId = null;
+
 /**
  * Show a screen by ID, hide all others.
  * Uses CSS transition classes for smooth animation.
  */
 export function showScreen(screenId) {
+  currentScreenId = screenId;
   const screens = document.querySelectorAll('.screen');
   screens.forEach((screen) => {
     if (screen.id === screenId) {
@@ -21,8 +24,10 @@ export function showScreen(screenId) {
       screen.style.opacity = '0';
       screen.style.transform = 'translateY(20px)';
       setTimeout(() => {
-        screen.classList.add('screen--hidden');
-        screen.classList.remove('screen--visible');
+        if (currentScreenId !== screen.id) {
+          screen.classList.add('screen--hidden');
+          screen.classList.remove('screen--visible');
+        }
       }, 400);
     }
   });
